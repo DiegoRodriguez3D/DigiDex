@@ -1,4 +1,3 @@
-<!-- DigiGrid.svelte -->
 <script lang="ts">
     import type { DigimonListItem } from "$lib/types";
     import DigiCard from "./DigiCard.svelte";
@@ -12,11 +11,10 @@
 </script>
 
 {#if loading}
-    <!-- Loading Skeleton Grid -->
     <div
         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
     >
-        {#each Array(20) as _, i}
+        {#each Array(20) as _}
             <div class="glass-card border border-white/10 p-4 animate-pulse">
                 <div
                     class="aspect-square bg-cyber-dark-600 rounded-lg mb-3"
@@ -29,7 +27,6 @@
         {/each}
     </div>
 {:else if digimon.length === 0}
-    <!-- Empty State -->
     <div class="flex flex-col items-center justify-center py-20 text-center">
         <div class="text-6xl mb-4 opacity-30">🔍</div>
         <h3 class="font-display text-xl text-gray-400 mb-2">
@@ -40,7 +37,6 @@
         </p>
     </div>
 {:else}
-    <!-- Digimon Grid -->
     <div
         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
     >

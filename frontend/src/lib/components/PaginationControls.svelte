@@ -1,4 +1,3 @@
-<!-- PaginationControls.svelte -->
 <script lang="ts">
     interface Props {
         currentPage: number;
@@ -11,7 +10,6 @@
 </script>
 
 <nav class="flex items-center justify-center gap-4 py-8">
-    <!-- Previous Button -->
     <a
         href={hasPrevious ? `/?page=${currentPage - 1}` : "#"}
         class="cyber-btn {!hasPrevious ? 'opacity-40 pointer-events-none' : ''}"
@@ -35,14 +33,12 @@
         </span>
     </a>
 
-    <!-- Page Info -->
     <div class="font-mono text-sm text-gray-400">
         <span class="text-neon-blue">{currentPage + 1}</span>
         <span class="mx-2">/</span>
         <span>{totalPages}</span>
     </div>
 
-    <!-- Next Button -->
     <a
         href={hasNext ? `/?page=${currentPage + 1}` : "#"}
         class="cyber-btn {!hasNext ? 'opacity-40 pointer-events-none' : ''}"

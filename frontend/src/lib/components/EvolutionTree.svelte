@@ -1,4 +1,3 @@
-<!-- EvolutionTree.svelte - Horizontal scrollable evolution list -->
 <script lang="ts">
     import type { Evolution } from "$lib/types";
 
@@ -34,7 +33,6 @@
                         href="/digimon/{evo.id}"
                         class="group flex-shrink-0 w-36 glass-card border border-white/10 p-3 hover:border-neon-blue/50 hover:glow-data transition-all duration-300"
                     >
-                        <!-- Evolution Image -->
                         <div
                             class="aspect-square flex items-center justify-center mb-2 overflow-hidden"
                         >
@@ -46,7 +44,6 @@
                             />
                         </div>
 
-                        <!-- Evolution Name -->
                         <div class="text-center">
                             <p class="font-mono text-xs text-white truncate">
                                 {evo.name}
@@ -61,10 +58,8 @@
                             {/if}
                         </div>
 
-                        <!-- Connection Line Decoration -->
                         <div
-                            class="absolute -right-4 top-1/2 w-4 h-px bg-gradient-to-r from-neon-blue/50 to-transparent
-                        opacity-0 group-last:hidden"
+                            class="absolute -right-4 top-1/2 w-4 h-px bg-gradient-to-r from-neon-blue/50 to-transparent opacity-0 group-last:hidden"
                         ></div>
                     </a>
                 {/each}

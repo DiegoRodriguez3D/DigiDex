@@ -7,7 +7,7 @@ const API_BASE = 'http://localhost:8000/api/v1';
 export const load: PageServerLoad = async ({ url, fetch }) => {
     const page = parseInt(url.searchParams.get('page') || '0', 10);
     const search = url.searchParams.get('search') || '';
-    const pageSize = 20;
+    const pageSize = 32;
 
     try {
         if (search) {

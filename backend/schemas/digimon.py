@@ -2,21 +2,18 @@ from pydantic import BaseModel
 
 
 class SkillSchema(BaseModel):
-    """A Digimon skill/attack."""
     id: int
     name: str
     description: str | None = None
 
 
 class FieldSchema(BaseModel):
-    """A Digimon field (Nature Spirits, Dragon's Roar, etc.)."""
     id: int
     name: str
     image: str | None = None
 
 
 class EvolutionSchema(BaseModel):
-    """An evolution (prior or next) for a Digimon."""
     id: int
     name: str
     image: str
@@ -24,7 +21,6 @@ class EvolutionSchema(BaseModel):
 
 
 class DigimonListItem(BaseModel):
-    """Simplified Digimon data for grid display."""
     id: int
     name: str
     image: str
@@ -33,7 +29,6 @@ class DigimonListItem(BaseModel):
 
 
 class DigimonDetail(BaseModel):
-    """Full Digimon detail for the analyzer view."""
     id: int
     name: str
     image: str
@@ -48,7 +43,6 @@ class DigimonDetail(BaseModel):
 
 
 class PaginationInfo(BaseModel):
-    """Pagination metadata."""
     current_page: int
     total_pages: int
     total_elements: int
@@ -57,6 +51,5 @@ class PaginationInfo(BaseModel):
 
 
 class DigimonListResponse(BaseModel):
-    """Paginated list response."""
     content: list[DigimonListItem]
     pagination: PaginationInfo

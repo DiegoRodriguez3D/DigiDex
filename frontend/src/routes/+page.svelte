@@ -1,4 +1,3 @@
-<!-- +page.svelte - Home page (The Grid) -->
 <script lang="ts">
     import DigiGrid from "$lib/components/DigiGrid.svelte";
     import PaginationControls from "$lib/components/PaginationControls.svelte";
@@ -20,7 +19,6 @@
 </svelte:head>
 
 <div class="container mx-auto px-4 py-8">
-    <!-- Page Header -->
     <div class="mb-8">
         {#if data.searchQuery}
             <div class="flex items-center gap-4 mb-4">
@@ -54,7 +52,6 @@
         {/if}
     </div>
 
-    <!-- Error State -->
     {#if data.error}
         <div class="glass-card border border-red-500/30 p-6 text-center mb-8">
             <div class="text-4xl mb-4">⚠️</div>
@@ -65,10 +62,8 @@
         </div>
     {/if}
 
-    <!-- Digimon Grid -->
     <DigiGrid digimon={data.digimon} />
 
-    <!-- Pagination (only show when not searching) -->
     {#if data.pagination && !data.searchQuery}
         <PaginationControls
             currentPage={data.pagination.current_page}

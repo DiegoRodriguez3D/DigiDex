@@ -1,4 +1,3 @@
-<!-- +page.svelte - Digimon Detail Page (Analyzer) -->
 <script lang="ts">
     import { fade, fly } from "svelte/transition";
     import DigiProfile from "$lib/components/DigiProfile.svelte";
@@ -29,7 +28,6 @@
 </svelte:head>
 
 <div class="container mx-auto px-4 py-8" in:fade={{ duration: 200 }}>
-    <!-- Back Navigation -->
     <a
         href="/"
         class="inline-flex items-center gap-2 font-mono text-sm text-gray-400 hover:text-neon-blue transition-colors mb-6"
@@ -50,7 +48,6 @@
         Back to Grid
     </a>
 
-    <!-- Page Header -->
     <div class="mb-6">
         <h2
             class="font-display text-sm text-neon-blue uppercase tracking-widest mb-1"
@@ -63,7 +60,6 @@
     </div>
 
     {#if data.error}
-        <!-- Error State -->
         <div
             class="glass-card border border-red-500/30 p-8 text-center"
             in:fly={{ y: 20, duration: 300 }}
@@ -77,12 +73,9 @@
         </div>
     {:else if data.digimon}
         <div class="space-y-8" in:fly={{ y: 20, duration: 300, delay: 100 }}>
-            <!-- Profile Section -->
             <DigiProfile digimon={data.digimon} />
 
-            <!-- Evolution Sections -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Prior Evolutions -->
                 <div class="glass-card border border-white/10 p-6">
                     <EvolutionTree
                         title="Prior Evolutions"
@@ -91,7 +84,6 @@
                     />
                 </div>
 
-                <!-- Next Evolutions -->
                 <div class="glass-card border border-white/10 p-6">
                     <EvolutionTree
                         title="Next Evolutions"

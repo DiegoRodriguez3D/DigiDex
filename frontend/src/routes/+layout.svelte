@@ -1,4 +1,3 @@
-<!-- +layout.svelte - Root layout with global styles -->
 <script lang="ts">
 	import "../app.css";
 	import Header from "$lib/components/Header.svelte";
@@ -11,7 +10,6 @@
 </script>
 
 <svelte:head>
-	<!-- Google Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link
 		rel="preconnect"
@@ -22,7 +20,6 @@
 		href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@500;600;700;800;900&display=swap"
 		rel="stylesheet"
 	/>
-
 	<meta
 		name="description"
 		content="DigiDex - Your digital gateway to the Digimon world. Explore, analyze, and discover all Digimon."
@@ -37,7 +34,6 @@
 		{@render children()}
 	</main>
 
-	<!-- Footer -->
 	<footer class="border-t border-white/10 py-6 mt-auto">
 		<div class="container mx-auto px-4 text-center">
 			<p class="font-mono text-xs text-gray-500">

@@ -1,5 +1,5 @@
-<!-- DigiProfile.svelte - Detail view with compact image frame -->
 <script lang="ts">
+    import { browser } from "$app/environment";
     import type { DigimonDetail } from "$lib/types";
 
     interface Props {
@@ -8,51 +8,69 @@
 
     let { digimon }: Props = $props();
 
-    // Get attribute color class
+    // Detect theme
+    let isLight = $state(false);
+    if (browser) {
+        isLight = document.documentElement.classList.contains("light");
+        const observer = new MutationObserver(() => {
+            isLight = document.documentElement.classList.contains("light");
+        });
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+    }
+
     function getAttributeClass(attribute: string | null): string {
-        if (!attribute) return "text-gray-400 bg-white/10";
-        const attr = attribute.toLowerCase();
-        if (attr === "vaccine") return "text-neon-orange bg-neon-orange/20";
-        if (attr === "virus") return "text-neon-purple bg-neon-purple/20";
-        if (attr === "data") return "text-neon-blue bg-neon-blue/20";
-        if (attr === "free") return "text-neon-green bg-neon-green/20";
-        return "text-gray-400 bg-white/10";
+        const classes: Record<string, string> = {
+            vaccine: "text-neon-orange bg-neon-orange/20",
+            virus: "text-neon-purple bg-neon-purple/20",
+            data: "text-neon-blue bg-neon-blue/20",
+            free: "text-neon-green bg-neon-green/20",
+        };
+        return attribute
+            ? (classes[attribute.toLowerCase()] ?? "text-gray-400 bg-white/10")
+            : "text-gray-400 bg-white/10";
     }
 
-    // Get color RGB based on attribute
-    function getColorRGB(attribute: string | null): string {
-        if (!attribute) return "0,243,255";
-        const attr = attribute.toLowerCase();
-        if (attr === "vaccine") return "255,153,0";
-        if (attr === "virus") return "189,0,255";
-        if (attr === "data") return "0,243,255";
-        if (attr === "free") return "0,255,65";
-        return "0,243,255";
+    function getColorRGB(attribute: string | null, light: boolean): string {
+        const lightColors: Record<string, string> = {
+            default: "0,100,120",
+            vaccine: "180,90,0",
+            virus: "120,0,180",
+            data: "0,100,120",
+            free: "0,120,50",
+        };
+
+        const darkColors: Record<string, string> = {
+            default: "0,243,255",
+            vaccine: "255,153,0",
+            virus: "189,0,255",
+            data: "0,243,255",
+            free: "0,255,65",
+        };
+
+        const colors = light ? lightColors : darkColors;
+        const attr = attribute?.toLowerCase() ?? "default";
+        return colors[attr] ?? colors.default;
     }
 
-    const colorRGB = $derived(getColorRGB(digimon.attribute));
+    const colorRGB = $derived(getColorRGB(digimon.attribute, isLight));
 </script>
 
 <div class="space-y-6">
-    <!-- Main Content: Image + Info side by side -->
     <div class="flex flex-col lg:flex-row gap-6 lg:items-start">
-        <!-- Image Frame - Self-sizing, only wraps the image -->
         <div class="flex justify-center lg:justify-start lg:flex-shrink-0">
             <div class="relative inline-block">
-                <!-- Outer glow effect -->
                 <div
                     class="absolute -inset-4 rounded-xl opacity-50 blur-lg"
                     style="background: radial-gradient(ellipse, rgba({colorRGB},0.3), transparent 70%);"
                 ></div>
 
-                <!-- Tech frame container -->
                 <div
-                    class="relative p-4 rounded-lg"
-                    style="background: linear-gradient(135deg, rgba(10,10,10,0.95), rgba(5,5,5,0.98));
-                    border: 2px solid rgba({colorRGB},0.6);
-                    box-shadow: 0 0 20px rgba({colorRGB},0.2), inset 0 0 30px rgba(0,0,0,0.5);"
+                    class="image-frame relative p-4 rounded-lg"
+                    style="border: 2px solid rgba({colorRGB},0.6); box-shadow: 0 0 20px rgba({colorRGB},0.2), inset 0 0 30px rgba(0,0,0,0.2);"
                 >
-                    <!-- Corner brackets -->
                     <div
                         class="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 rounded-tl"
                         style="border-color: rgba({colorRGB},0.8);"
@@ -70,18 +88,11 @@
                         style="border-color: rgba({colorRGB},0.8);"
                     ></div>
 
-                    <!-- Digital grid pattern inside frame -->
                     <div
                         class="absolute inset-4 opacity-20 rounded"
-                        style="
-            background-image: 
-              linear-gradient(rgba({colorRGB},0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba({colorRGB},0.3) 1px, transparent 1px);
-            background-size: 12px 12px;
-          "
+                        style="background-image: linear-gradient(rgba({colorRGB},0.3) 1px, transparent 1px), linear-gradient(90deg, rgba({colorRGB},0.3) 1px, transparent 1px); background-size: 12px 12px;"
                     ></div>
 
-                    <!-- Circuit line decorations -->
                     <div
                         class="absolute top-4 left-1/2 -translate-x-1/2 w-1/3 h-px"
                         style="background: linear-gradient(90deg, transparent, rgba({colorRGB},0.5), transparent);"
@@ -91,7 +102,6 @@
                         style="background: linear-gradient(90deg, transparent, rgba({colorRGB},0.4), transparent);"
                     ></div>
 
-                    <!-- Hexagon decorations -->
                     <div
                         class="absolute top-3 right-3 w-2 h-2"
                         style="background: rgba({colorRGB},0.5); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);"
@@ -101,7 +111,6 @@
                         style="background: rgba({colorRGB},0.4); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);"
                     ></div>
 
-                    <!-- Digimon Image -->
                     <img
                         src={digimon.image}
                         alt={digimon.name}
@@ -109,7 +118,6 @@
                         style="filter: drop-shadow(0 0 15px rgba({colorRGB},0.4));"
                     />
 
-                    <!-- Scan line overlay -->
                     <div
                         class="absolute inset-4 pointer-events-none overflow-hidden rounded"
                     >
@@ -121,12 +129,10 @@
             </div>
         </div>
 
-        <!-- Info Section -->
         <div
             class="flex-1 min-w-0 glass-card p-6 space-y-5"
             style="border: 1px solid rgba({colorRGB},0.3); box-shadow: 0 0 15px rgba({colorRGB},0.1);"
         >
-            <!-- Name and Badges -->
             <div>
                 <h1
                     class="font-display text-3xl sm:text-4xl font-black text-white mb-3"
@@ -159,14 +165,12 @@
                     {#each digimon.types as type}
                         <span
                             class="px-3 py-1 text-sm font-mono rounded-full bg-white/10 text-gray-300"
+                            >{type}</span
                         >
-                            {type}
-                        </span>
                     {/each}
                 </div>
             </div>
 
-            <!-- Data Log (Description) -->
             {#if digimon.description}
                 <div class="space-y-2">
                     <h3
@@ -189,7 +193,6 @@
                 </div>
             {/if}
 
-            <!-- Skills -->
             {#if digimon.skills.length > 0}
                 <div class="space-y-3">
                     <h3
@@ -233,7 +236,6 @@
                 </div>
             {/if}
 
-            <!-- Fields -->
             {#if digimon.fields.length > 0}
                 <div class="space-y-3">
                     <h3
@@ -283,7 +285,6 @@
             transform: translateY(200%);
         }
     }
-
     .animate-scan {
         animation: scan 4s linear infinite;
     }
