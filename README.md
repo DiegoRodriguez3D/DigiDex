@@ -1,6 +1,8 @@
-# 🦖 DigiDex - Digital Gate
+# DigiDex - Digital Gate
 
 A modern, cyberpunk-themed Digimon encyclopedia built with SvelteKit and FastAPI.
+
+<img width="1663" height="1086" alt="image" src="https://github.com/user-attachments/assets/f41934a8-d1c0-417a-999e-712981e36c00" />
 
 **[English](#english) | [Español](#español)**
 
@@ -44,48 +46,9 @@ DigiDex/
 └── render.yaml           # Render deployment config
 ```
 
-### 🚀 Local Development
-
-#### Prerequisites
-- Python 3.11+
-- Node.js 20+
-- npm or pnpm
-
-#### Backend
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
-```
-
-#### Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Open http://localhost:5173
-
 ### 🌐 Deployment
-
-#### Backend (Render)
-1. Create a new Web Service on [render.com](https://render.com)
-2. Connect your repository
-3. Configure:
-   - **Root Directory**: `backend`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-4. Add environment variable: `FRONTEND_URL=https://your-app.vercel.app`
-
-#### Frontend (Vercel)
-1. Import project on [vercel.com](https://vercel.com)
-2. Configure:
-   - **Root Directory**: `frontend`
-   - **Framework**: SvelteKit (auto-detected)
-3. Add environment variable: `API_URL=https://your-api.onrender.com/api/v1`
+#### Backend ([Render](https://digidex-wri6.onrender.com/docs))
+#### Frontend ([Vercel](https://digi-dex-two.vercel.app))
 
 ### 📝 Environment Variables
 
@@ -115,48 +78,9 @@ Open http://localhost:5173
 | Fuente de Datos | [Digi-API](https://digi-api.com) |
 | Despliegue | Vercel (Frontend), Render (Backend) |
 
-### 🚀 Desarrollo Local
-
-#### Requisitos
-- Python 3.11+
-- Node.js 20+
-- npm o pnpm
-
-#### Backend
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
-```
-
-#### Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Abre http://localhost:5173
-
 ### 🌐 Despliegue
-
-#### Backend (Render)
-1. Crea un nuevo Web Service en [render.com](https://render.com)
-2. Conecta tu repositorio
-3. Configura:
-   - **Root Directory**: `backend`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-4. Añade variable de entorno: `FRONTEND_URL=https://tu-app.vercel.app`
-
-#### Frontend (Vercel)
-1. Importa el proyecto en [vercel.com](https://vercel.com)
-2. Configura:
-   - **Root Directory**: `frontend`
-   - **Framework**: SvelteKit (auto-detectado)
-3. Añade variable de entorno: `API_URL=https://tu-api.onrender.com/api/v1`
+#### Backend ([Render](https://digidex-wri6.onrender.com/docs))
+#### Frontend ([Vercel](https://digi-dex-two.vercel.app))
 
 ### 📝 Variables de Entorno
 
