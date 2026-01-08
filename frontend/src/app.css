@@ -1,0 +1,297 @@
+@import "tailwindcss";
+
+/* ========================================
+   DigiDex - Cyberpunk Theme
+   ======================================== */
+
+/* Custom CSS Variables for Cyberpunk Theme */
+@theme {
+  /* Colors - Cyber Dark Palette */
+  --color-cyber-dark: #050505;
+  --color-cyber-dark-800: #0a0a0a;
+  --color-cyber-dark-700: #0f0f0f;
+  --color-cyber-dark-600: #151515;
+  --color-cyber-dark-500: #1a1a1a;
+
+  /* Neon Accent Colors */
+  --color-neon-blue: #00f3ff;
+  --color-neon-blue-dim: #00a5b0;
+  --color-neon-orange: #ff9900;
+  --color-neon-orange-dim: #b36b00;
+  --color-neon-purple: #bd00ff;
+  --color-neon-purple-dim: #8a00b8;
+  --color-neon-green: #00ff41;
+  --color-neon-green-dim: #00b32d;
+  --color-neon-yellow: #f0ff00;
+
+  /* Fonts */
+  --font-display: 'Orbitron', 'Rajdhani', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-mono);
+  background-color: var(--color-cyber-dark);
+  color: #e0e0e0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cyber-dark-700);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-neon-blue-dim);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-blue);
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+/* Glassmorphism Card */
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(10, 10, 10, 0.9) 0%,
+    rgba(15, 15, 15, 0.8) 100%
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+/* Attribute Border Glow Effects */
+.glow-vaccine {
+  box-shadow: 
+    0 0 5px var(--color-neon-orange-dim),
+    0 0 15px rgba(255, 153, 0, 0.3),
+    inset 0 0 5px rgba(255, 153, 0, 0.1);
+  border-color: var(--color-neon-orange);
+}
+
+.glow-virus {
+  box-shadow: 
+    0 0 5px var(--color-neon-purple-dim),
+    0 0 15px rgba(189, 0, 255, 0.3),
+    inset 0 0 5px rgba(189, 0, 255, 0.1);
+  border-color: var(--color-neon-purple);
+}
+
+.glow-data {
+  box-shadow: 
+    0 0 5px var(--color-neon-blue-dim),
+    0 0 15px rgba(0, 243, 255, 0.3),
+    inset 0 0 5px rgba(0, 243, 255, 0.1);
+  border-color: var(--color-neon-blue);
+}
+
+.glow-free {
+  box-shadow: 
+    0 0 5px var(--color-neon-green-dim),
+    0 0 15px rgba(0, 255, 65, 0.3),
+    inset 0 0 5px rgba(0, 255, 65, 0.1);
+  border-color: var(--color-neon-green);
+}
+
+/* Default glow (unknown attribute) */
+.glow-default {
+  box-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.2),
+    0 0 10px rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+
+/* Glitch Effect for Title */
+@keyframes glitch {
+  0% {
+    text-shadow: 
+      2px 0 var(--color-neon-blue),
+      -2px 0 var(--color-neon-purple);
+  }
+  25% {
+    text-shadow: 
+      -2px 0 var(--color-neon-blue),
+      2px 0 var(--color-neon-purple);
+  }
+  50% {
+    text-shadow: 
+      2px 2px var(--color-neon-blue),
+      -2px -2px var(--color-neon-purple);
+  }
+  75% {
+    text-shadow: 
+      -2px 2px var(--color-neon-blue),
+      2px -2px var(--color-neon-purple);
+  }
+  100% {
+    text-shadow: 
+      2px 0 var(--color-neon-blue),
+      -2px 0 var(--color-neon-purple);
+  }
+}
+
+.glitch-text {
+  animation: glitch 3s ease-in-out infinite;
+}
+
+/* Float Animation for Digimon Images */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse Glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Scan Line Effect (decorative) */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scanline::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-neon-blue),
+    transparent
+  );
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
+}
+
+/* ========================================
+   Component Patterns
+   ======================================== */
+
+/* Cyber Button */
+.cyber-btn {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(
+    135deg,
+    var(--color-cyber-dark-600) 0%,
+    var(--color-cyber-dark-800) 100%
+  );
+  border: 1px solid var(--color-neon-blue-dim);
+  color: var(--color-neon-blue);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+}
+
+.cyber-btn:hover {
+  background: linear-gradient(
+    135deg,
+    var(--color-cyber-dark-500) 0%,
+    var(--color-cyber-dark-700) 100%
+  );
+  border-color: var(--color-neon-blue);
+  box-shadow: 
+    0 0 10px var(--color-neon-blue-dim),
+    inset 0 0 10px rgba(0, 243, 255, 0.1);
+}
+
+.cyber-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Horizontal Scroll Container */
+.scroll-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-x::-webkit-scrollbar {
+  height: 6px;
+}
+
+/* Section Headers with Circuit Lines */
+.section-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--color-neon-blue-dim),
+    transparent
+  );
+}
