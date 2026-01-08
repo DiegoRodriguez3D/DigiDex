@@ -1,4 +1,4 @@
-<!-- DigiProfile.svelte - Detail view profile component -->
+<!-- DigiProfile.svelte - Detail view with compact image frame -->
 <script lang="ts">
     import type { DigimonDetail } from "$lib/types";
 
@@ -19,51 +19,118 @@
         return "text-gray-400 bg-white/10";
     }
 
-    // Get border glow class
-    function getBorderGlow(attribute: string | null): string {
-        if (!attribute) return "border-white/20";
+    // Get color RGB based on attribute
+    function getColorRGB(attribute: string | null): string {
+        if (!attribute) return "0,243,255";
         const attr = attribute.toLowerCase();
-        if (attr === "vaccine") return "border-neon-orange glow-vaccine";
-        if (attr === "virus") return "border-neon-purple glow-virus";
-        if (attr === "data") return "border-neon-blue glow-data";
-        if (attr === "free") return "border-neon-green glow-free";
-        return "border-white/20";
+        if (attr === "vaccine") return "255,153,0";
+        if (attr === "virus") return "189,0,255";
+        if (attr === "data") return "0,243,255";
+        if (attr === "free") return "0,255,65";
+        return "0,243,255";
     }
+
+    const colorRGB = $derived(getColorRGB(digimon.attribute));
 </script>
 
-<div class="glass-card border-2 {getBorderGlow(digimon.attribute)} p-6 sm:p-8">
-    <div class="flex flex-col lg:flex-row gap-8">
-        <!-- Image Section -->
-        <div class="lg:w-1/3 flex justify-center">
-            <div class="relative">
-                <!-- Decorative Frame -->
+<div class="space-y-6">
+    <!-- Main Content: Image + Info side by side -->
+    <div class="flex flex-col lg:flex-row gap-6 lg:items-start">
+        <!-- Image Frame - Self-sizing, only wraps the image -->
+        <div class="flex justify-center lg:justify-start lg:flex-shrink-0">
+            <div class="relative inline-block">
+                <!-- Outer glow effect -->
                 <div
-                    class="absolute -inset-4 border border-neon-blue/30 rounded-lg"
-                ></div>
-                <div
-                    class="absolute -inset-2 border border-neon-purple/20 rounded-lg rotate-3"
+                    class="absolute -inset-4 rounded-xl opacity-50 blur-lg"
+                    style="background: radial-gradient(ellipse, rgba({colorRGB},0.3), transparent 70%);"
                 ></div>
 
-                <!-- Image -->
-                <img
-                    src={digimon.image}
-                    alt={digimon.name}
-                    class="relative max-w-[280px] w-full float-animation z-10"
-                />
-
-                <!-- Scan Line Effect -->
+                <!-- Tech frame container -->
                 <div
-                    class="absolute inset-0 scanline pointer-events-none"
-                ></div>
+                    class="relative p-4 rounded-lg"
+                    style="background: linear-gradient(135deg, rgba(10,10,10,0.95), rgba(5,5,5,0.98));
+                    border: 2px solid rgba({colorRGB},0.6);
+                    box-shadow: 0 0 20px rgba({colorRGB},0.2), inset 0 0 30px rgba(0,0,0,0.5);"
+                >
+                    <!-- Corner brackets -->
+                    <div
+                        class="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 rounded-tl"
+                        style="border-color: rgba({colorRGB},0.8);"
+                    ></div>
+                    <div
+                        class="absolute top-1 right-1 w-4 h-4 border-t-2 border-r-2 rounded-tr"
+                        style="border-color: rgba({colorRGB},0.8);"
+                    ></div>
+                    <div
+                        class="absolute bottom-1 left-1 w-4 h-4 border-b-2 border-l-2 rounded-bl"
+                        style="border-color: rgba({colorRGB},0.8);"
+                    ></div>
+                    <div
+                        class="absolute bottom-1 right-1 w-4 h-4 border-b-2 border-r-2 rounded-br"
+                        style="border-color: rgba({colorRGB},0.8);"
+                    ></div>
+
+                    <!-- Digital grid pattern inside frame -->
+                    <div
+                        class="absolute inset-4 opacity-20 rounded"
+                        style="
+            background-image: 
+              linear-gradient(rgba({colorRGB},0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba({colorRGB},0.3) 1px, transparent 1px);
+            background-size: 12px 12px;
+          "
+                    ></div>
+
+                    <!-- Circuit line decorations -->
+                    <div
+                        class="absolute top-4 left-1/2 -translate-x-1/2 w-1/3 h-px"
+                        style="background: linear-gradient(90deg, transparent, rgba({colorRGB},0.5), transparent);"
+                    ></div>
+                    <div
+                        class="absolute bottom-4 left-1/2 -translate-x-1/2 w-1/4 h-px"
+                        style="background: linear-gradient(90deg, transparent, rgba({colorRGB},0.4), transparent);"
+                    ></div>
+
+                    <!-- Hexagon decorations -->
+                    <div
+                        class="absolute top-3 right-3 w-2 h-2"
+                        style="background: rgba({colorRGB},0.5); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);"
+                    ></div>
+                    <div
+                        class="absolute bottom-3 left-3 w-1.5 h-1.5"
+                        style="background: rgba({colorRGB},0.4); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);"
+                    ></div>
+
+                    <!-- Digimon Image -->
+                    <img
+                        src={digimon.image}
+                        alt={digimon.name}
+                        class="relative w-[200px] sm:w-[220px] lg:w-[250px] h-auto float-animation z-10"
+                        style="filter: drop-shadow(0 0 15px rgba({colorRGB},0.4));"
+                    />
+
+                    <!-- Scan line overlay -->
+                    <div
+                        class="absolute inset-4 pointer-events-none overflow-hidden rounded"
+                    >
+                        <div
+                            class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent animate-scan"
+                        ></div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Info Section -->
-        <div class="lg:w-2/3 space-y-6">
+        <div
+            class="flex-1 min-w-0 glass-card p-6 space-y-5"
+            style="border: 1px solid rgba({colorRGB},0.3); box-shadow: 0 0 15px rgba({colorRGB},0.1);"
+        >
             <!-- Name and Badges -->
             <div>
                 <h1
-                    class="font-display text-3xl sm:text-4xl font-black text-white mb-3 glitch-text"
+                    class="font-display text-3xl sm:text-4xl font-black text-white mb-3"
+                    style="text-shadow: 0 0 20px rgba({colorRGB},0.4);"
                 >
                     {digimon.name}
                 </h1>
@@ -72,6 +139,7 @@
                     {#if digimon.level}
                         <span
                             class="px-3 py-1 text-sm font-mono rounded-full bg-neon-yellow/20 text-neon-yellow"
+                            style="box-shadow: 0 0 10px rgba(240,255,0,0.2);"
                         >
                             ⭐ {digimon.level}
                         </span>
@@ -82,6 +150,7 @@
                             class="px-3 py-1 text-sm font-mono rounded-full {getAttributeClass(
                                 digimon.attribute,
                             )}"
+                            style="box-shadow: 0 0 10px rgba({colorRGB},0.3);"
                         >
                             {digimon.attribute}
                         </span>
@@ -101,9 +170,18 @@
             {#if digimon.description}
                 <div class="space-y-2">
                     <h3
-                        class="font-display text-sm text-neon-blue uppercase tracking-wider section-header"
+                        class="font-display text-sm uppercase tracking-wider flex items-center gap-2"
+                        style="color: rgba({colorRGB},1); text-shadow: 0 0 10px rgba({colorRGB},0.5);"
                     >
-                        <span>Data Log</span>
+                        <span
+                            class="w-2 h-2 rounded-full"
+                            style="background: rgba({colorRGB},0.8); box-shadow: 0 0 6px rgba({colorRGB},0.8);"
+                        ></span>
+                        Data Log
+                        <span
+                            class="flex-1 h-px"
+                            style="background: linear-gradient(to right, rgba({colorRGB},0.5), transparent);"
+                        ></span>
                     </h3>
                     <p class="font-mono text-sm text-gray-300 leading-relaxed">
                         {digimon.description}
@@ -115,14 +193,24 @@
             {#if digimon.skills.length > 0}
                 <div class="space-y-3">
                     <h3
-                        class="font-display text-sm text-neon-blue uppercase tracking-wider section-header"
+                        class="font-display text-sm uppercase tracking-wider flex items-center gap-2"
+                        style="color: rgba({colorRGB},1); text-shadow: 0 0 10px rgba({colorRGB},0.5);"
                     >
-                        <span>Battle Skills</span>
+                        <span
+                            class="w-2 h-2 rounded-full"
+                            style="background: rgba({colorRGB},0.8); box-shadow: 0 0 6px rgba({colorRGB},0.8);"
+                        ></span>
+                        Battle Skills
+                        <span
+                            class="flex-1 h-px"
+                            style="background: linear-gradient(to right, rgba({colorRGB},0.5), transparent);"
+                        ></span>
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {#each digimon.skills.slice(0, 6) as skill}
                             <div
-                                class="bg-cyber-dark-600 border border-white/10 rounded px-3 py-2"
+                                class="bg-cyber-dark-600 border border-white/10 rounded px-3 py-2 hover:border-white/20 transition-colors"
+                                style="box-shadow: inset 0 0 10px rgba(0,0,0,0.3);"
                             >
                                 <div class="font-mono text-sm text-white">
                                     {skill.name}
@@ -149,9 +237,18 @@
             {#if digimon.fields.length > 0}
                 <div class="space-y-3">
                     <h3
-                        class="font-display text-sm text-neon-blue uppercase tracking-wider section-header"
+                        class="font-display text-sm uppercase tracking-wider flex items-center gap-2"
+                        style="color: rgba({colorRGB},1); text-shadow: 0 0 10px rgba({colorRGB},0.5);"
                     >
-                        <span>Fields</span>
+                        <span
+                            class="w-2 h-2 rounded-full"
+                            style="background: rgba({colorRGB},0.8); box-shadow: 0 0 6px rgba({colorRGB},0.8);"
+                        ></span>
+                        Fields
+                        <span
+                            class="flex-1 h-px"
+                            style="background: linear-gradient(to right, rgba({colorRGB},0.5), transparent);"
+                        ></span>
                     </h3>
                     <div class="flex flex-wrap gap-2">
                         {#each digimon.fields as field}
@@ -176,3 +273,18 @@
         </div>
     </div>
 </div>
+
+<style>
+    @keyframes scan {
+        0% {
+            transform: translateY(-100%);
+        }
+        100% {
+            transform: translateY(200%);
+        }
+    }
+
+    .animate-scan {
+        animation: scan 4s linear infinite;
+    }
+</style>
