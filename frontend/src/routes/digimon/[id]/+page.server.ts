@@ -1,8 +1,8 @@
-// +page.server.ts - Server-side data loading for Digimon detail page
 import type { PageServerLoad } from './$types';
 import type { DigimonDetail } from '$lib/types';
+import { env } from '$env/dynamic/private';
 
-const API_BASE = 'http://localhost:8000/api/v1';
+const API_BASE = env.API_URL || 'http://localhost:8000/api/v1';
 
 export const load: PageServerLoad = async ({ params, fetch }) => {
     const { id } = params;
