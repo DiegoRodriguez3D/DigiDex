@@ -1,14 +1,12 @@
 # DigiDex - Digital Gate
 
-A modern, cyberpunk-themed Digimon encyclopedia built with SvelteKit and FastAPI.
-
-<img width="1663" height="1086" alt="image" src="https://github.com/user-attachments/assets/f41934a8-d1c0-417a-999e-712981e36c00" />
-
 **[English](#english) | [Español](#español)**
 
 ---
 
-## English
+## 🇬🇧 English
+
+A modern, cyberpunk-themed Digimon encyclopedia built with SvelteKit and FastAPI.
 
 ### 🎮 Features
 
@@ -59,7 +57,18 @@ DigiDex/
 
 ---
 
-## Español
+### 📄 License
+
+MIT © 2024
+
+---
+
+*Data provided by [Digi-API](https://digi-api.com)*
+
+
+## 🇪🇸 Español
+
+Una enciclopedia Digimon moderna, con temática Cyberpunk, creada con SvelteKit y FastAPI
 
 ### 🎮 Características
 
@@ -91,10 +100,10 @@ DigiDex/
 
 ---
 
-## 📄 License
+### 📄 Licencia
 
 MIT © 2024
 
 ---
 
-*Data provided by [Digi-API](https://digi-api.com)*
+*Datos proporcionados por [Digi-API](https://digi-api.com)*
