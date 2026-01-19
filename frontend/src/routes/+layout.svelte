@@ -4,9 +4,12 @@
 
 	interface Props {
 		children: import("svelte").Snippet;
+		data: {
+			portfolioUrl: string;
+		};
 	}
 
-	let { children }: Props = $props();
+	let { children, data }: Props = $props();
 </script>
 
 <svelte:head>
@@ -28,7 +31,7 @@
 </svelte:head>
 
 <div class="min-h-screen flex flex-col bg-cyber-dark">
-	<Header />
+	<Header portfolioUrl={data.portfolioUrl} />
 
 	<main class="flex-1">
 		{@render children()}
@@ -44,7 +47,7 @@
 					class="text-neon-blue hover:underline">Digi-API</a
 				>
 				<span class="mx-2">•</span>
-				Digital Gate v1.0
+				DigiDex v1.0
 			</p>
 		</div>
 	</footer>

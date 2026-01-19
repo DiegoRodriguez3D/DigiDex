@@ -15,7 +15,7 @@
 
 <svelte:head>
     {#if data.digimon}
-        <title>{data.digimon.name} | DigiDex - Digital Gate</title>
+        <title>{data.digimon.name} | DigiDex</title>
         <meta
             name="description"
             content="Analyze {data.digimon
@@ -45,7 +45,7 @@
                 d="M15 19l-7-7 7-7"
             />
         </svg>
-        Back to Grid
+        Back to Digimon
     </a>
 
     <div class="mb-6">
@@ -69,7 +69,7 @@
                 Analysis Failed
             </h3>
             <p class="font-mono text-sm text-gray-400 mb-6">{data.error}</p>
-            <a href="/" class="cyber-btn">Return to Grid</a>
+            <a href="/" class="cyber-btn">Return to Digimon</a>
         </div>
     {:else if data.digimon}
         <div class="space-y-8" in:fly={{ y: 20, duration: 300, delay: 100 }}>
@@ -78,7 +78,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="glass-card border border-white/10 p-6">
                     <EvolutionTree
-                        title="Prior Evolutions"
+                        title="Prior Digivolutions"
                         evolutions={data.digimon.prior_evolutions}
                         emptyMessage="This is a base form"
                     />
@@ -86,9 +86,9 @@
 
                 <div class="glass-card border border-white/10 p-6">
                     <EvolutionTree
-                        title="Next Evolutions"
+                        title="Next Digivolutions"
                         evolutions={data.digimon.next_evolutions}
-                        emptyMessage="No evolutions discovered"
+                        emptyMessage="No digivolutions discovered"
                     />
                 </div>
             </div>

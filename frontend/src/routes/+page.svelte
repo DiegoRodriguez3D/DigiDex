@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-    <title>Digital Gate | DigiDex - Explore the Digital World</title>
+    <title>DigiDex - Explore the Digital World</title>
 </svelte:head>
 
 <div class="container mx-auto px-4 py-8">
@@ -39,7 +39,7 @@
             </p>
         {:else}
             <h2 class="font-display text-xl text-white mb-2 section-header">
-                <span>The Grid</span>
+                <span>Digimon</span>
             </h2>
             <p class="font-mono text-sm text-gray-500">
                 {#if data.pagination}
