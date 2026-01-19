@@ -23,7 +23,7 @@ A modern, cyberpunk-themed Digimon encyclopedia built with SvelteKit and FastAPI
 | Frontend | SvelteKit, Tailwind CSS v4, TypeScript |
 | Backend | FastAPI, Python 3.11+, httpx |
 | Data Source | [Digi-API](https://digi-api.com) |
-| Deployment | Vercel (Frontend), Render (Backend) |
+| Deployment | VPS with Coolify |
 
 ### 📁 Project Structure
 
@@ -43,10 +43,6 @@ DigiDex/
 │   └── package.json
 └── render.yaml           # Render deployment config
 ```
-
-### 🌐 Deployment
-#### Backend ([Render](https://digidex-wri6.onrender.com/docs))
-#### Frontend ([Vercel](https://digi-dex-two.vercel.app))
 
 ### 📝 Environment Variables
 
@@ -85,11 +81,7 @@ Una enciclopedia Digimon moderna, con temática Cyberpunk, creada con SvelteKit 
 | Frontend | SvelteKit, Tailwind CSS v4, TypeScript |
 | Backend | FastAPI, Python 3.11+, httpx |
 | Fuente de Datos | [Digi-API](https://digi-api.com) |
-| Despliegue | Vercel (Frontend), Render (Backend) |
-
-### 🌐 Despliegue
-#### Backend ([Render](https://digidex-wri6.onrender.com/docs))
-#### Frontend ([Vercel](https://digi-dex-two.vercel.app))
+| Despliegue | VPS con Coolify |
 
 ### 📝 Variables de Entorno
 
